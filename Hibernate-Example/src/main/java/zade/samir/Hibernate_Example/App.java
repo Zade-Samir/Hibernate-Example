@@ -42,7 +42,28 @@ public class App
     	
 //-----------------Get the data from database-------------------//
 
-    	Student getStudentData = null;
+//    	Student getStudentData = null;
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	getStudentData = session.find(Student.class, 3); //get the student data
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(getStudentData);
+    	
+//-----------------Update the data to database-------------------//
+
+    	Student updateStudentData = new Student();
+    	
+    	updateStudentData.setRollNo(1);
+    	updateStudentData.setsName("Samir Zade");
+    	updateStudentData.setsAge(23);
+    	
     	SessionFactory sf = new Configuration()
 		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
 		    			.configure()
@@ -50,10 +71,12 @@ public class App
     	
     	Session session = sf.openSession(); //open the session for connection
     	
-    	getStudentData = session.find(Student.class, 3); //get the student data
+    	Transaction transaction = session.beginTransaction();
+    	session.merge(updateStudentData); //update and even create the data if not exists
+    	transaction.commit();
     	
     	session.close(); //close the session
     	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
-    	System.out.println(getStudentData);
+    	System.out.println(updateStudentData);
     }
 }
