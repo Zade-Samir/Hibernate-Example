@@ -11,22 +11,31 @@ public class App
         
     	Student s1 = new Student(); 
     	
-    	s1.setRollNo(1);
-    	s1.setsName("Samir");
-    	s1.setsAge(23);
+    	s1.setRollNo(3);
+    	s1.setsName("Shwetu");
+    	s1.setsAge(15);
     	
-    	Configuration cfg = new Configuration();
-    	cfg.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class);
-    	cfg.configure();
+//    	Configuration cfg = new Configuration();
+//    	cfg.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class);
+//    	cfg.configure();
+//    	
+//    	//build the session factory and return the sessionFactory Object
+//    	SessionFactory sf = cfg.buildSessionFactory();  
     	
-    	//build the session factory and return the sessionFactory Object
-    	SessionFactory sf = cfg.buildSessionFactory();  
+    	
+    	SessionFactory sf = new Configuration()
+		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
+		    			.configure()
+		    			.buildSessionFactory();    	
     	
     	Session session = sf.openSession(); //open the session for connection
     	
     	Transaction transaction = session.beginTransaction(); //begin database changes or begin transactions
     	session.persist(s1); //save the data (persist means save)
     	transaction.commit(); //end the transaction or save the changes
+    	
+    	session.close(); //close the session
+    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.
     	
     	System.out.println(s1);
     }
