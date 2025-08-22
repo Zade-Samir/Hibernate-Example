@@ -2,6 +2,7 @@ package zade.samir.Hibernate_Example;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 public class App 
@@ -15,12 +16,18 @@ public class App
     	s1.setsAge(23);
     	
     	Configuration cfg = new Configuration();
+    	cfg.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class);
+    	cfg.configure();
+    	
     	//build the session factory and return the sessionFactory Object
     	SessionFactory sf = cfg.buildSessionFactory();  
+    	
     	Session session = sf.openSession(); //open the session for connection
     	
-    	session.persist(s1);
+    	Transaction transaction = session.beginTransaction(); //begin database changes or begin transactions
+    	session.persist(s1); //save the data (persist means save)
+    	transaction.commit(); //end the transaction or save the changes
     	
-    	System.out.println(session);
+    	System.out.println(s1);
     }
 }
