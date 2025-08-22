@@ -87,23 +87,53 @@ public class App
     	
 //-----------------Delete the data from database-------------------//
     	
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	Student updateStudentData = session.find(Student.class, 3);
+//    	
+//    	Transaction transaction = session.beginTransaction();
+//    	
+//    	session.remove(updateStudentData);
+//    	
+//    	transaction.commit();
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(updateStudentData);
+    	
+//-----------------Embedding(Joining) two databases - Alien & Laptop-------------------//
+    	
+    	Laptop laptop = new Laptop();
+    	laptop.setBrand("Asus");
+    	laptop.setModel("ROG");
+    	laptop.setRam(16);
+    	
+    	Alien alien = new Alien(); 
+    	alien.setAid(101);
+    	alien.setAname("Aditya");
+    	alien.setTech("Java");
+    	alien.setLaptop(laptop);
+    	
     	SessionFactory sf = new Configuration()
-		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
+		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
 		    			.configure()
 		    			.buildSessionFactory();    	
     	
     	Session session = sf.openSession(); //open the session for connection
     	
-    	Student updateStudentData = session.find(Student.class, 3);
-    	
     	Transaction transaction = session.beginTransaction();
     	
-    	session.remove(updateStudentData);
+    	session.persist(alien);
     	
     	transaction.commit();
     	
     	session.close(); //close the session
     	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
-    	System.out.println(updateStudentData);
+    	System.out.println(alien);
     }
 }
