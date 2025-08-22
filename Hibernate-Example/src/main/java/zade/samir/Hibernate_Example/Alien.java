@@ -3,6 +3,7 @@ package zade.samir.Hibernate_Example;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -13,6 +14,7 @@ public class Alien {
 	private int aid;
 	private String aname;
 	private String tech;
+	@OneToOne
 	private Laptop laptop;
 	
 	public int getAid() {
