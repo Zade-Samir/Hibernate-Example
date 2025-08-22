@@ -40,6 +40,8 @@ public class App
 //    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.
 //    
     	
+    	
+    	
 //-----------------Get the data from database-------------------//
 
 //    	Student getStudentData = null;
@@ -56,13 +58,34 @@ public class App
 //    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
 //    	System.out.println(getStudentData);
     	
-//-----------------Update the data to database-------------------//
-
-    	Student updateStudentData = new Student();
     	
-    	updateStudentData.setRollNo(1);
-    	updateStudentData.setsName("Samir Zade");
-    	updateStudentData.setsAge(23);
+    	
+//-----------------Update the data to database-------------------//
+//
+//    	Student updateStudentData = new Student();
+//    	
+//    	updateStudentData.setRollNo(1);
+//    	updateStudentData.setsName("Samir Zade");
+//    	updateStudentData.setsAge(23);
+//    	
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	Transaction transaction = session.beginTransaction();
+//    	session.merge(updateStudentData); //update and even create the data if not exists
+//    	transaction.commit();
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(updateStudentData);
+
+    	
+    	
+//-----------------Delete the data from database-------------------//
     	
     	SessionFactory sf = new Configuration()
 		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Student.class)
@@ -71,8 +94,12 @@ public class App
     	
     	Session session = sf.openSession(); //open the session for connection
     	
+    	Student updateStudentData = session.find(Student.class, 3);
+    	
     	Transaction transaction = session.beginTransaction();
-    	session.merge(updateStudentData); //update and even create the data if not exists
+    	
+    	session.remove(updateStudentData);
+    	
     	transaction.commit();
     	
     	session.close(); //close the session
