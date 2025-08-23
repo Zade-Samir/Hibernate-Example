@@ -1,5 +1,7 @@
 package zade.samir.Hibernate_Example;
 
+import java.util.Arrays;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -138,17 +140,106 @@ public class App
     	
 //-----------------OneToOne Mapping-------------------//
     	
-    	Laptop laptop = new Laptop();
-    	laptop.setLid(1);
-    	laptop.setBrand("Asus");
-    	laptop.setModel("ROG");
-    	laptop.setRam(16);
+//    	Laptop laptop = new Laptop();
+//    	laptop.setLid(1);
+//    	laptop.setBrand("Asus");
+//    	laptop.setModel("ROG");
+//    	laptop.setRam(16);
+//    	
+//    	Alien alien = new Alien(); 
+//    	alien.setAid(110);
+//    	alien.setAname("Aditya");
+//    	alien.setTech("Java");
+//    	alien.setLaptop(laptop);
+//    	
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Laptop.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	Transaction transaction = session.beginTransaction();
+//    	
+//    	session.persist(laptop); //primary table, hence above
+//    	session.persist(alien); //child table, hence below
+//    	
+//    	transaction.commit();
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(alien);
+    	
+    	
+    	
+    	
+//-----------------OneToMany Mapping-------------------//
+    	
+//    	Laptop laptop1 = new Laptop();
+//    	laptop1.setLid(3);
+//    	laptop1.setBrand("Asus");
+//    	laptop1.setModel("ROG");
+//    	laptop1.setRam(16);
+//    	
+//    	Laptop laptop2 = new Laptop();
+//    	laptop2.setLid(2);
+//    	laptop2.setBrand("Acer");
+//    	laptop2.setModel("Extensa 15");
+//    	laptop2.setRam(8);
+//    	
+//    	Alien alien = new Alien(); 
+//    	alien.setAid(111);
+//    	alien.setAname("Anurag");
+//    	alien.setTech("Python");
+//    	alien.setLaptop(Arrays.asList(laptop1, laptop2));
+//    	
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Laptop.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	Transaction transaction = session.beginTransaction();
+//    	
+//    	session.persist(laptop1); //primary table, hence above
+//    	session.persist(laptop2); //primary table, hence above
+//    	session.persist(alien); //child table, hence below
+//    	
+//    	transaction.commit();
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(alien);
+    	
+    	
+    	
+    	
+    	
+//-----------------OneToOne Mapping-------------------//
+    	
+    	Laptop laptop1 = new Laptop();
+    	laptop1.setLid(3);
+    	laptop1.setBrand("Asus");
+    	laptop1.setModel("ROG");
+    	laptop1.setRam(16);
+    	
+    	Laptop laptop2 = new Laptop();
+    	laptop2.setLid(2);
+    	laptop2.setBrand("Acer");
+    	laptop2.setModel("Extensa 15");
+    	laptop2.setRam(8);
     	
     	Alien alien = new Alien(); 
-    	alien.setAid(110);
-    	alien.setAname("Aditya");
-    	alien.setTech("Java");
-    	alien.setLaptop(laptop);
+    	alien.setAid(111);
+    	alien.setAname("Anurag");
+    	alien.setTech("Python");
+    	alien.setLaptop(Arrays.asList(laptop1, laptop2));
+    	
+    	laptop1.setAlien(alien);
+    	laptop2.setAlien(alien);
     	
     	SessionFactory sf = new Configuration()
 		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
@@ -160,7 +251,8 @@ public class App
     	
     	Transaction transaction = session.beginTransaction();
     	
-    	session.persist(laptop); //primary table, hence above
+    	session.persist(laptop1); //primary table, hence above
+    	session.persist(laptop2); //primary table, hence above
     	session.persist(alien); //child table, hence below
     	
     	transaction.commit();
