@@ -1,8 +1,11 @@
 package zade.samir.Hibernate_Example;
 
+import java.util.List;
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 //@Embeddable //join two tables with pojo classes
@@ -14,8 +17,10 @@ public class Laptop {
 	private String brand;
 	private String model;
 	private int ram;
-	@ManyToOne //The Laptop class has the actual foreign key column (alien_id or similar).
-	private Alien alien;
+////	@ManyToOne //The Laptop class has the actual foreign key column (alien_id or similar).
+//	private List<Alien> alien;
+	@ManyToMany(mappedBy = "laptops")
+	private List<Alien> aliens;
 	
 	
 	public int getLid() {
@@ -42,20 +47,18 @@ public class Laptop {
 	public void setRam(int ram) {
 		this.ram = ram;
 	}
-	
-	
-	
-	public Alien getAlien() {
-		return alien;
+	public List<Alien> getAliens() {
+		return aliens;
 	}
-	public void setAlien(Alien alien) {
-		this.alien = alien;
+	public void setAliens(List<Alien> aliens) {
+		this.aliens = aliens;
 	}
 	@Override
 	public String toString() {
-		return "Laptop [lid=" + lid + ", brand=" + brand + ", model=" + model + ", ram=" + ram + ", alien=" + alien
-				+ "]";
+		return "Laptop [lid=" + lid + ", brand=" + brand + ", model=" + model + ", ram=" + ram + ", aliens=" + (aliens != null ? aliens.size() : 0) + "]";
 	}
+
+	
 	
 	
 	

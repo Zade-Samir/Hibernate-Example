@@ -220,8 +220,51 @@ public class App
     	
 //-----------------OneToOne Mapping-------------------//
     	
+//    	Laptop laptop1 = new Laptop();
+//    	laptop1.setLid(3);
+//    	laptop1.setBrand("Asus");
+//    	laptop1.setModel("ROG");
+//    	laptop1.setRam(16);
+//    	
+//    	Laptop laptop2 = new Laptop();
+//    	laptop2.setLid(2);
+//    	laptop2.setBrand("Acer");
+//    	laptop2.setModel("Extensa 15");
+//    	laptop2.setRam(8);
+//    	
+//    	Alien alien = new Alien(); 
+//    	alien.setAid(111);
+//    	alien.setAname("Anurag");
+//    	alien.setTech("Python");
+//    	alien.setLaptop(Arrays.asList(laptop1, laptop2));
+//    	
+//    	laptop1.setAlien(alien);
+//    	laptop2.setAlien(alien);
+//    	
+//    	SessionFactory sf = new Configuration()
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
+//		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Laptop.class)
+//		    			.configure()
+//		    			.buildSessionFactory();    	
+//    	
+//    	Session session = sf.openSession(); //open the session for connection
+//    	
+//    	Transaction transaction = session.beginTransaction();
+//    	
+//    	session.persist(laptop1); //primary table, hence above
+//    	session.persist(laptop2); //primary table, hence above
+//    	session.persist(alien); //child table, hence below
+//    	
+//    	transaction.commit();
+//    	
+//    	session.close(); //close the session
+//    	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
+//    	System.out.println(alien);
+    	
+//-----------------OneToOne Mapping-------------------//
+    	
     	Laptop laptop1 = new Laptop();
-    	laptop1.setLid(3);
+    	laptop1.setLid(1);
     	laptop1.setBrand("Asus");
     	laptop1.setModel("ROG");
     	laptop1.setRam(16);
@@ -232,14 +275,36 @@ public class App
     	laptop2.setModel("Extensa 15");
     	laptop2.setRam(8);
     	
-    	Alien alien = new Alien(); 
-    	alien.setAid(111);
-    	alien.setAname("Anurag");
-    	alien.setTech("Python");
-    	alien.setLaptop(Arrays.asList(laptop1, laptop2));
+    	Laptop laptop3 = new Laptop();
+    	laptop3.setLid(3);
+    	laptop3.setBrand("Apple");
+    	laptop3.setModel("Macbook M4");
+    	laptop3.setRam(16);
     	
-    	laptop1.setAlien(alien);
-    	laptop2.setAlien(alien);
+    	Alien alien1 = new Alien(); 
+    	alien1.setAid(111);
+    	alien1.setAname("Anurag");
+    	alien1.setTech("Python");
+    	
+    	Alien alien2 = new Alien(); 
+    	alien2.setAid(112);
+    	alien2.setAname("Aditya");
+    	alien2.setTech("Java");
+    	
+    	Alien alien3 = new Alien(); 
+    	alien3.setAid(113);
+    	alien3.setAname("Samir");
+    	alien3.setTech("C Programming");
+    	
+    	//adding laptop to aliens
+    	alien1.setLaptop(Arrays.asList(laptop1, laptop2));
+    	alien2.setLaptop(Arrays.asList(laptop2, laptop3));
+    	alien3.setLaptop(Arrays.asList(laptop1, laptop3));
+    	
+    	//adding the aliens to laptop
+    	laptop1.setAliens(Arrays.asList(alien1, alien3));
+    	laptop2.setAliens(Arrays.asList(alien1, alien2, alien3));
+    	laptop3.setAliens(Arrays.asList(alien2, alien3));
     	
     	SessionFactory sf = new Configuration()
 		    			.addAnnotatedClass(zade.samir.Hibernate_Example.Alien.class)
@@ -251,14 +316,18 @@ public class App
     	
     	Transaction transaction = session.beginTransaction();
     	
-    	session.persist(laptop1); //primary table, hence above
-    	session.persist(laptop2); //primary table, hence above
-    	session.persist(alien); //child table, hence below
+    	session.persist(laptop1); 
+    	session.persist(laptop2); 
+    	session.persist(laptop3); 
+    	
+    	session.persist(alien1); 
+    	session.persist(alien2); 
+    	session.persist(alien3); 
     	
     	transaction.commit();
     	
     	session.close(); //close the session
     	sf.close(); //close the sessionFactory as it consume lot's of memory and heavy.	
-    	System.out.println(alien);
+    	System.out.println(alien1);
     }
 }

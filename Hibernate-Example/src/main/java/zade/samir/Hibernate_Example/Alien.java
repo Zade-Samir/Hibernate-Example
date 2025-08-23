@@ -6,6 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -19,8 +20,10 @@ public class Alien {
 	private String aname;
 	private String tech;
 	//The Alien class is not responsible for managing the relationship.
-	@OneToMany(mappedBy = "alien", cascade = CascadeType.ALL)
-	private List<Laptop> laptop;
+//	@OneToMany(mappedBy = "alien", cascade = CascadeType.ALL)
+//	private List<Laptop> laptop;
+	@ManyToMany
+	private List<Laptop> laptops;
 	
 	public int getAid() {
 		return aid;
@@ -41,14 +44,14 @@ public class Alien {
 		this.tech = tech;
 	}
 	public List<Laptop> getLaptop() {
-		return laptop;
+		return laptops;
 	}
 	public void setLaptop(List<Laptop> laptop) {
-		this.laptop = laptop;
+		this.laptops = laptop;
 	}
 	@Override
 	public String toString() {
-		return "Alien [aid=" + aid + ", aname=" + aname + ", tech=" + tech + ", laptop=" + (laptop != null ? laptop.size() : 0) + "]";
+		return "Alien [aid=" + aid + ", aname=" + aname + ", tech=" + tech + ", laptop=" + (laptops != null ? laptops.size() : 0) + "]";
 	}
 	
 	
